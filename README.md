@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Formly
+
+Formly is a Next.js web application that lets you design custom forms, share them through a public link, and collect responses from a private dashboard.
+
+## Core Features
+
+- 🧑‍💼 Authentication powered by Clerk (sign in / sign up flows).
+- 🛠️ Visual builder to create and update forms with multiple questions.
+- 📊 Dashboard with metrics, form lists, and response management.
+- 🔗 Public URL for every form to share with respondents.
+- 🗃️ Persistent storage using Prisma and PostgreSQL.
+
+## Tech Stack
+
+- Next.js 15 (App Router) and React 19
+- TypeScript
+- Tailwind CSS 4  (with shadcn/ui)
+- Prisma ORM with Prisma Accelerate
+- Clerk for authentication
+- PostgreSQL as the database
+
+## Prerequisites
+
+- Node.js 18 or higher
+- An accessible PostgreSQL database
+- Clerk account and API keys
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Copy the environment variable template:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Fill in the values in `.env`:
+
+   - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+   - `CLERK_SECRET_KEY`
+   - `DATABASE_URL`
+   - `NEXT_PUBLIC_APP_URL` (for example `http://localhost:3000/`)
+
+4. Generate the Prisma client and sync the schema with your database:
+
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+## Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application runs at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Useful Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command          | Description                              |
+|------------------|------------------------------------------|
+| `npm run build`  | Create a production build                 |
+| `npm run start`  | Start the app in production mode          |
+| `npm run lint`   | Run ESLint rules                          |
+| `npm run pretty` | Format code with Prettier                 |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `app/`: Public and protected routes (App Router).
+- `components/`: Reusable UI and form components.
+- `lib/`: Utilities, Prisma client, and Clerk integration.
+- `prisma/`: Database schema and ORM configuration.
+- `public/`: Static assets.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+When deploying to production make sure to:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Provide the same environment variables defined in `.env`.
+- Run `npm run build` followed by `npm run start` on your hosting provider (Vercel, Railway, etc.).
+- Set a valid `NEXT_PUBLIC_APP_URL` so shareable form links resolve correctly.
