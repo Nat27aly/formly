@@ -2,6 +2,9 @@
 
 Formly is a Next.js web application that lets you design custom forms, share them through a public link, and collect responses from a private dashboard.
 
+# Demo
+👉 [Go to demo](https://formly-next.netlify.app/).
+
 ## Core Features
 
 - 🧑‍💼 Authentication powered by Clerk (sign in / sign up flows).
